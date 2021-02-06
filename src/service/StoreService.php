@@ -13,7 +13,7 @@ class StoreService extends Base implements MainModelInterface {
     use \xjryanse\traits\MainModelTrait;
 
     protected static $mainModel;
-    protected static $mainModelClass = '\\app\\store\\model\\Store';
+    protected static $mainModelClass = '\\xjryanse\\store\\model\\Store';
 
     /**
      *
