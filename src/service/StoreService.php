@@ -5,7 +5,7 @@ namespace xjryanse\store\service;
 use xjryanse\system\interfaces\MainModelInterface;
 
 /**
- * 
+ * 仓库管理
  */
 class StoreService extends Base implements MainModelInterface {
 
