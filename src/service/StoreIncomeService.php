@@ -13,7 +13,7 @@ class StoreIncomeService extends Base implements MainModelInterface {
     use \xjryanse\traits\MainModelTrait;
 
     protected static $mainModel;
-    protected static $mainModelClass = '\\app\\store\\model\\StoreIncome';
+    protected static $mainModelClass = '\\xjryanse\\store\\model\\StoreIncome';
 
     /**
      *

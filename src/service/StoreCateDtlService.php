@@ -13,7 +13,7 @@ class StoreCateDtlService extends Base implements MainModelInterface {
     use \xjryanse\traits\MainModelTrait;
 
     protected static $mainModel;
-    protected static $mainModelClass = '\\app\\store\\model\\StoreCateDtl';
+    protected static $mainModelClass = '\\xjryanse\\store\\model\\StoreCateDtl';
 
     /**
      *

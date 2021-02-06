@@ -13,7 +13,7 @@ class StoreOutcomeDtlService extends Base implements MainModelInterface {
     use \xjryanse\traits\MainModelTrait;
 
     protected static $mainModel;
-    protected static $mainModelClass = '\\app\\store\\model\\StoreOutcomeDtl';
+    protected static $mainModelClass = '\\xjryanse\\store\\model\\StoreOutcomeDtl';
 
     /**
      *
