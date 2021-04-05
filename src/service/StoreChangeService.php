@@ -7,13 +7,13 @@ use xjryanse\system\interfaces\MainModelInterface;
 /**
  * 
  */
-class StoreIncomeService extends Base implements MainModelInterface {
+class StoreChangeService extends Base implements MainModelInterface {
 
     use \xjryanse\traits\InstTrait;
     use \xjryanse\traits\MainModelTrait;
 
     protected static $mainModel;
-    protected static $mainModelClass = '\\xjryanse\\store\\model\\StoreIncome';
+    protected static $mainModelClass = '\\xjryanse\\store\\model\\StoreChange';
 
     /**
      *
@@ -51,14 +51,14 @@ class StoreIncomeService extends Base implements MainModelInterface {
     }
 
     /**
-     * 入库说明
+     * 出库说明
      */
     public function fDescribe() {
         return $this->getFFieldValue(__FUNCTION__);
     }
 
     /**
-     * 入库人
+     * 出库人
      */
     public function fUserId() {
         return $this->getFFieldValue(__FUNCTION__);

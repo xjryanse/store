@@ -7,13 +7,13 @@ use xjryanse\system\interfaces\MainModelInterface;
 /**
  * 
  */
-class StoreOutcomeService extends Base implements MainModelInterface {
+class StoreChangeDtlService extends Base implements MainModelInterface {
 
     use \xjryanse\traits\InstTrait;
     use \xjryanse\traits\MainModelTrait;
 
     protected static $mainModel;
-    protected static $mainModelClass = '\\app\\store\\model\\StoreOutcome';
+    protected static $mainModelClass = '\\xjryanse\\store\\model\\StoreChangeDtl';
 
     /**
      *
@@ -37,28 +37,70 @@ class StoreOutcomeService extends Base implements MainModelInterface {
     }
 
     /**
-     * 客户id
+     * [冗]客户id
      */
     public function fCustomerId() {
         return $this->getFFieldValue(__FUNCTION__);
     }
 
     /**
-     * 仓库id
+     * [冗]仓库id
      */
     public function fStoreId() {
         return $this->getFFieldValue(__FUNCTION__);
     }
 
     /**
-     * 出库说明
+     * 入库/出库单id
      */
-    public function fDescribe() {
+    public function fBillId() {
         return $this->getFFieldValue(__FUNCTION__);
     }
 
     /**
-     * 出库人
+     * 明细id
+     */
+    public function fDtlId() {
+        return $this->getFFieldValue(__FUNCTION__);
+    }
+
+    /**
+     * [冗]明细名称
+     */
+    public function fDtlName() {
+        return $this->getFFieldValue(__FUNCTION__);
+    }
+
+    /**
+     * 数量
+     */
+    public function fAmount() {
+        return $this->getFFieldValue(__FUNCTION__);
+    }
+
+    /**
+     * 单价
+     */
+    public function fUnitPrize() {
+        return $this->getFFieldValue(__FUNCTION__);
+    }
+
+    /**
+     * 金额
+     */
+    public function fSumPrize() {
+        return $this->getFFieldValue(__FUNCTION__);
+    }
+
+    /**
+     * [冗]单位
+     */
+    public function fUnit() {
+        return $this->getFFieldValue(__FUNCTION__);
+    }
+
+    /**
+     * 入库人
      */
     public function fUserId() {
         return $this->getFFieldValue(__FUNCTION__);

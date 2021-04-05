@@ -4,7 +4,7 @@ namespace xjryanse\store\model;
 /**
  * 
  */
-class StoreIncome extends Base
+class StoreChange extends Base
 {
     
 

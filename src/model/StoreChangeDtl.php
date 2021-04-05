@@ -4,7 +4,7 @@ namespace xjryanse\store\model;
 /**
  * 
  */
-class StoreOutcomeDtl extends Base
+class StoreChangeDtl extends Base
 {
     
 
