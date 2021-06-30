@@ -3,45 +3,18 @@
 namespace xjryanse\store\service;
 
 use xjryanse\system\interfaces\MainModelInterface;
-use xjryanse\goods\service\GoodsService;
 
 /**
  * 
  */
-class StoreChangeDtlService extends Base implements MainModelInterface {
+class StoreDtlService extends Base implements MainModelInterface {
 
     use \xjryanse\traits\InstTrait;
     use \xjryanse\traits\MainModelTrait;
 
     protected static $mainModel;
-    protected static $mainModelClass = '\\xjryanse\\store\\model\\StoreChangeDtl';
+    protected static $mainModelClass = '\\xjryanse\\store\\model\\StoreDtl';
 
-    /**
-     * 空明细设定出入库单id
-     */
-    public function setChangeId( $changeId )
-    {
-        $info = $this->get(0);
-        if(Arrays::value($info, 'change_id')){
-            throw new Exception( '出入库明细'.$this->uuid.'已经对应了单号'. Arrays::value($info, 'change_id') );
-        }
-        return $this->update([ 'change_id'=>$changeId]);
-    }
-    
-    /**
-     * 更新商品的库存余额
-     */
-    public function updateGoodsStock()
-    {
-        self::checkTransaction();
-        $info = $this->get(0);
-        $goodsId = $info['goods_id'];
-        $con[] = ['goods_id','=',$goodsId];
-        $con[] = ['has_settle','=',1];
-        $stock = self::sum($con,'amount');
-        //更新商品库存量
-        GoodsService::getInstance( $goodsId )->update(['stock'=>$stock]);
-    }
     /**
      *
      */
@@ -64,93 +37,51 @@ class StoreChangeDtlService extends Base implements MainModelInterface {
     }
 
     /**
-     * [冗]客户id
+     * 分类id
      */
-    public function fCustomerId() {
+    public function fCateId() {
         return $this->getFFieldValue(__FUNCTION__);
     }
 
     /**
-     * [冗]仓库id
+     * 图片
      */
-    public function fStoreId() {
+    public function fPicture() {
         return $this->getFFieldValue(__FUNCTION__);
     }
 
     /**
-     * 入库/出库单id
+     * 品牌/供应商
      */
-    public function fBillId() {
+    public function fSupplier() {
         return $this->getFFieldValue(__FUNCTION__);
     }
 
     /**
-     * 明细id
-     */
-    public function fDtlId() {
-        return $this->getFFieldValue(__FUNCTION__);
-    }
-
-    /**
-     * [冗]明细名称
+     * 杂项名称
      */
     public function fDtlName() {
         return $this->getFFieldValue(__FUNCTION__);
     }
 
     /**
-     * 数量
+     * 当前库存量
      */
-    public function fAmount() {
+    public function fCurrentCount() {
         return $this->getFFieldValue(__FUNCTION__);
     }
 
     /**
-     * 单价
-     */
-    public function fUnitPrize() {
-        return $this->getFFieldValue(__FUNCTION__);
-    }
-
-    /**
-     * 金额
-     */
-    public function fSumPrize() {
-        return $this->getFFieldValue(__FUNCTION__);
-    }
-
-    /**
-     * [冗]单位
+     * 库存量单位
      */
     public function fUnit() {
         return $this->getFFieldValue(__FUNCTION__);
     }
 
     /**
-     * 入库人
+     * 库存金额
      */
-    public function fUserId() {
-        return $this->getFFieldValue(__FUNCTION__);
-    }
-
-    /**
-     * 客户对接人
-     */
-    public function fCustomerUserId() {
-        return $this->getFFieldValue(__FUNCTION__);
-    }
-
-    /**
-     * 仓库管理员
-     */
-    public function fStoreUserId() {
-        return $this->getFFieldValue(__FUNCTION__);
-    }
-
-    /**
-     * 凭据id
-     */
-    public function fFileId() {
+    public function fCurrentMoney() {
         return $this->getFFieldValue(__FUNCTION__);
     }
 

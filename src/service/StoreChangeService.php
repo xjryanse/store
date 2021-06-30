@@ -15,6 +15,36 @@ class StoreChangeService extends Base implements MainModelInterface {
     protected static $mainModel;
     protected static $mainModelClass = '\\xjryanse\\store\\model\\StoreChange';
 
+    public static function extraPreSave(&$data, $uuid) {
+        self::checkTransaction();
+        //【关联已有对账单明细】
+        if(isset( $data['storeChangeDtlIds'])){
+            //明细笔数
+            $storeChangeDtlIdCount = count($data['storeChangeDtlIds']);
+            //更新对账单订单的账单id
+            foreach( $data['storeChangeDtlIds'] as $value){
+                //财务账单-订单；
+                StoreChangeDtlService::getInstance( $value )->setChangeId( $uuid );
+            }
+            $data['dtl_count'] = $storeChangeDtlIdCount;
+        }
+    }
+    
+    public function extraPreDelete() {
+        self::checkTransaction();
+        $info = $this->get(0);
+        if( Arrays::value($info, 'has_settle') ){
+            throw new Exception('出入库单已结，不可删');
+        }
+        //删除对账单的明细
+        $con[] = ['change_id','=',$this->uuid];
+        $storeChangeDtls = StoreChangeDtlService::lists( $con );
+        foreach( $storeChangeDtls as $value){
+            //一个个删，可能涉及状态更新
+            StoreChangeDtlService::getInstance($value['id'])->delete();
+        }        
+    }
+
     /**
      *
      */
