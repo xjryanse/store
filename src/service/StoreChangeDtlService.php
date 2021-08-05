@@ -4,7 +4,6 @@ namespace xjryanse\store\service;
 
 use xjryanse\system\interfaces\MainModelInterface;
 use xjryanse\goods\service\GoodsService;
-
 /**
  * 
  */
@@ -16,7 +15,83 @@ class StoreChangeDtlService extends Base implements MainModelInterface {
     protected static $mainModel;
     protected static $mainModelClass = '\\xjryanse\\store\\model\\StoreChangeDtl';
 
+    
     /**
+     * 钩子-保存前
+     */
+    public static function extraPreSave(&$data, $uuid) {
+        
+    }
+    /**
+     * 钩子-保存后
+     */
+    public static function extraAfterSave(&$data, $uuid) {
+        self::getInstance($uuid)->updateGoodsStock();
+    }
+    /**
+     * 钩子-更新前
+     */
+    public static function extraPreUpdate(&$data, $uuid) {
+
+    }
+    /**
+     * 钩子-更新后
+     */
+    public static function extraAfterUpdate(&$data, $uuid) {
+        self::getInstance($uuid)->updateGoodsStock();
+    }    
+    /**
+     * 钩子-删除前
+     */
+    public function extraPreDelete()
+    {
+        self::checkTransaction();
+    }
+    
+    public function delete()
+    {
+        $info = $this->get(0);
+        //删除前
+        if(method_exists( __CLASS__, 'extraPreDelete')){
+            $this->extraPreDelete();      //注：id在preSaveData方法中生成
+        }
+        //删除
+        $res = $this->commDelete();
+        //删除后
+        if(method_exists( __CLASS__, 'extraAfterDelete')){
+            $this->extraAfterDelete();      //注：id在preSaveData方法中生成
+        }
+        //商品信息更新库存
+        GoodsService::getInstance($info['goods_id'])->updateStock();
+        return $res;
+    }
+    /**
+     * 钩子-删除后
+     */
+    public function extraAfterDelete()
+    {
+
+    }
+    
+    /**
+     * 根据商品id，取库存值
+     */
+    public static function getStockByGoodsId( $goodsId ){
+        $con[] = ['goods_id','=',$goodsId];
+        return self::sum($con, 'amount');
+    }
+    /**
+     * spuid，获取旗下所有商品的库存总和
+     * @param type $spuId
+     * @return type
+     */
+    public static function getStockBySpuId( $spuId ){
+        $cond[]     = ['spu_id','=',$spuId];
+        $goodsIds   = GoodsService::ids( $cond );
+        
+        $con[]      = ['goods_id','in',$goodsIds];
+        return self::sum($con, 'amount');
+    }    /**
      * 空明细设定出入库单id
      */
     public function setChangeId( $changeId )
@@ -37,7 +112,6 @@ class StoreChangeDtlService extends Base implements MainModelInterface {
         $info = $this->get(0);
         $goodsId = $info['goods_id'];
         $con[] = ['goods_id','=',$goodsId];
-        $con[] = ['has_settle','=',1];
         $stock = self::sum($con,'amount');
         //更新商品库存量
         GoodsService::getInstance( $goodsId )->update(['stock'=>$stock]);
