@@ -81,7 +81,7 @@ class StoreChangeDtlService extends Base implements MainModelInterface {
         return self::sum($con, 'amount');
     }
     /**
-     * spuid，获取旗下所有商品的库存总和
+     * 逐步弃用，使用getStockBySpuIds 替代 spuid，获取旗下所有商品的库存总和
      * @param type $spuId
      * @return type
      */
@@ -91,7 +91,8 @@ class StoreChangeDtlService extends Base implements MainModelInterface {
         
         $con[]      = ['goods_id','in',$goodsIds];
         return self::sum($con, 'amount');
-    }    /**
+    }
+    /**
      * 空明细设定出入库单id
      */
     public function setChangeId( $changeId )
