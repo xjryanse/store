@@ -4,7 +4,7 @@ namespace xjryanse\store\model;
 /**
  * 
  */
-class StoreCate extends Base
+class StoreManage extends Base
 {
     
 

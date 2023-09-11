@@ -7,13 +7,74 @@ use xjryanse\system\interfaces\MainModelInterface;
 /**
  * 
  */
-class StoreCateDtlService extends Base implements MainModelInterface {
+class StoreManageService extends Base implements MainModelInterface {
 
     use \xjryanse\traits\InstTrait;
     use \xjryanse\traits\MainModelTrait;
+    use \xjryanse\traits\MainModelQueryTrait;
+    use \xjryanse\traits\StaticModelTrait;
 
     protected static $mainModel;
-    protected static $mainModelClass = '\\xjryanse\\store\\model\\StoreCateDtl';
+    protected static $mainModelClass = '\\xjryanse\\store\\model\\StoreManage';
+
+    /**
+     * 20220629
+     * @param type $storeId
+     * @return type
+     */
+    public static function manageUserIds($storeId) {
+        $con[] = ['store_id', '=', $storeId];
+        return self::staticConColumn('manage_user_id', $con);
+    }
+
+    public static function extraPreSave(&$data, $uuid) {
+        self::stopUse(__METHOD__);
+    }
+
+    /**
+     * 20220627
+     * @param type $data
+     * @param type $uuid
+     */
+    public static function ramPreSave(&$data, $uuid) {
+        
+    }
+
+    public static function ramAfterSave(&$data, $uuid) {
+        
+    }
+
+    public static function ramPreUpdate(&$data, $uuid) {
+        
+    }
+
+    /**
+     * 20220628
+     * @param type $data
+     * @param type $uuid
+     */
+    public static function ramAfterUpdate(&$data, $uuid) {
+        
+    }
+
+    public static function extraPreUpdate(&$data, $uuid) {
+        self::stopUse(__METHOD__);
+    }
+
+    /**
+     * 不删明细
+     */
+    public function extraPreDelete() {
+        //20220627
+        self::stopUse(__METHOD__);
+    }
+
+    /**
+     * 20220627:优化性能
+     */
+    public function ramPreDelete() {
+        
+    }
 
     /**
      *
@@ -37,51 +98,51 @@ class StoreCateDtlService extends Base implements MainModelInterface {
     }
 
     /**
-     * 分类id
+     * 客户id
      */
-    public function fCateId() {
+    public function fCustomerId() {
         return $this->getFFieldValue(__FUNCTION__);
     }
 
     /**
-     * 图片
+     * 仓库id
      */
-    public function fPicture() {
+    public function fStoreId() {
         return $this->getFFieldValue(__FUNCTION__);
     }
 
     /**
-     * 品牌/供应商
+     * 出库说明
      */
-    public function fSupplier() {
+    public function fDescribe() {
         return $this->getFFieldValue(__FUNCTION__);
     }
 
     /**
-     * 杂项名称
+     * 出库人
      */
-    public function fDtlName() {
+    public function fUserId() {
         return $this->getFFieldValue(__FUNCTION__);
     }
 
     /**
-     * 当前库存量
+     * 客户对接人
      */
-    public function fCurrentCount() {
+    public function fCustomerUserId() {
         return $this->getFFieldValue(__FUNCTION__);
     }
 
     /**
-     * 库存量单位
+     * 仓库管理员
      */
-    public function fUnit() {
+    public function fStoreUserId() {
         return $this->getFFieldValue(__FUNCTION__);
     }
 
     /**
-     * 库存金额
+     * 凭据id
      */
-    public function fCurrentMoney() {
+    public function fFileId() {
         return $this->getFFieldValue(__FUNCTION__);
     }
 
