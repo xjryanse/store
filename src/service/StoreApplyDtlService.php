@@ -3,16 +3,14 @@
 namespace xjryanse\store\service;
 
 use xjryanse\system\interfaces\MainModelInterface;
-use xjryanse\logic\Arrays;
 
 /**
- * 
+ * 仓库管理
  */
-class ViewStoreUserMonthlyStaticsService extends Base implements MainModelInterface {
+class StoreApplyDtlService extends Base implements MainModelInterface {
 
     use \xjryanse\traits\InstTrait;
     use \xjryanse\traits\MainModelTrait;
-    use \xjryanse\traits\MainModelRamTrait;
     use \xjryanse\traits\MainModelCacheTrait;
     use \xjryanse\traits\MainModelCheckTrait;
     use \xjryanse\traits\MainModelGroupTrait;
@@ -20,6 +18,11 @@ class ViewStoreUserMonthlyStaticsService extends Base implements MainModelInterf
 
 
     protected static $mainModel;
-    protected static $mainModelClass = '\\xjryanse\\store\\model\\ViewStoreUserMonthlyStatics';
+    protected static $mainModelClass = '\\xjryanse\\store\\model\\StoreApplyDtl';
 
+    public static function extraDetails($ids) {
+        return self::commExtraDetails($ids, function($lists) use ($ids) {
+                    return $lists;
+                }, true);
+    }
 }

@@ -1,86 +1,10 @@
 <?php
-
-namespace xjryanse\store\service;
-
-use xjryanse\system\interfaces\MainModelInterface;
+namespace xjryanse\store\service\change;
 
 /**
- * 
+ * 分页复用列表
  */
-class StoreManageService extends Base implements MainModelInterface {
-
-    use \xjryanse\traits\InstTrait;
-    use \xjryanse\traits\MainModelTrait;
-    use \xjryanse\traits\MainModelRamTrait;
-    use \xjryanse\traits\MainModelCacheTrait;
-    use \xjryanse\traits\MainModelCheckTrait;
-    use \xjryanse\traits\MainModelGroupTrait;
-    use \xjryanse\traits\MainModelQueryTrait;
-
-    use \xjryanse\traits\StaticModelTrait;
-
-    protected static $mainModel;
-    protected static $mainModelClass = '\\xjryanse\\store\\model\\StoreManage';
-
-    /**
-     * 20220629
-     * @param type $storeId
-     * @return type
-     */
-    public static function manageUserIds($storeId) {
-        $con[] = ['store_id', '=', $storeId];
-        return self::staticConColumn('manage_user_id', $con);
-    }
-
-    public static function extraPreSave(&$data, $uuid) {
-        self::stopUse(__METHOD__);
-    }
-
-    /**
-     * 20220627
-     * @param type $data
-     * @param type $uuid
-     */
-    public static function ramPreSave(&$data, $uuid) {
-        
-    }
-
-    public static function ramAfterSave(&$data, $uuid) {
-        
-    }
-
-    public static function ramPreUpdate(&$data, $uuid) {
-        
-    }
-
-    /**
-     * 20220628
-     * @param type $data
-     * @param type $uuid
-     */
-    public static function ramAfterUpdate(&$data, $uuid) {
-        
-    }
-
-    public static function extraPreUpdate(&$data, $uuid) {
-        self::stopUse(__METHOD__);
-    }
-
-    /**
-     * 不删明细
-     */
-    public function extraPreDelete() {
-        //20220627
-        self::stopUse(__METHOD__);
-    }
-
-    /**
-     * 20220627:优化性能
-     */
-    public function ramPreDelete() {
-        
-    }
-
+trait FieldTraits{
     /**
      *
      */

@@ -3,12 +3,11 @@
 namespace xjryanse\store\service;
 
 use xjryanse\system\interfaces\MainModelInterface;
-use xjryanse\logic\Arrays;
 
 /**
- * 
+ * 仓库物品类型管理
  */
-class ViewStoreUserMonthlyStaticsService extends Base implements MainModelInterface {
+class StoreGoodsCateService extends Base implements MainModelInterface {
 
     use \xjryanse\traits\InstTrait;
     use \xjryanse\traits\MainModelTrait;
@@ -18,8 +17,9 @@ class ViewStoreUserMonthlyStaticsService extends Base implements MainModelInterf
     use \xjryanse\traits\MainModelGroupTrait;
     use \xjryanse\traits\MainModelQueryTrait;
 
+    use \xjryanse\traits\ObjectAttrTrait;
 
     protected static $mainModel;
-    protected static $mainModelClass = '\\xjryanse\\store\\model\\ViewStoreUserMonthlyStatics';
+    protected static $mainModelClass = '\\xjryanse\\store\\model\\StoreGoodsCate';
 
 }

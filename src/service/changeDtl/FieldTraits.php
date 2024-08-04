@@ -1,85 +1,10 @@
 <?php
-
-namespace xjryanse\store\service;
-
-use xjryanse\system\interfaces\MainModelInterface;
+namespace xjryanse\store\service\changeDtl;
 
 /**
- * 
+ * 分页复用列表
  */
-class StoreManageService extends Base implements MainModelInterface {
-
-    use \xjryanse\traits\InstTrait;
-    use \xjryanse\traits\MainModelTrait;
-    use \xjryanse\traits\MainModelRamTrait;
-    use \xjryanse\traits\MainModelCacheTrait;
-    use \xjryanse\traits\MainModelCheckTrait;
-    use \xjryanse\traits\MainModelGroupTrait;
-    use \xjryanse\traits\MainModelQueryTrait;
-
-    use \xjryanse\traits\StaticModelTrait;
-
-    protected static $mainModel;
-    protected static $mainModelClass = '\\xjryanse\\store\\model\\StoreManage';
-
-    /**
-     * 20220629
-     * @param type $storeId
-     * @return type
-     */
-    public static function manageUserIds($storeId) {
-        $con[] = ['store_id', '=', $storeId];
-        return self::staticConColumn('manage_user_id', $con);
-    }
-
-    public static function extraPreSave(&$data, $uuid) {
-        self::stopUse(__METHOD__);
-    }
-
-    /**
-     * 20220627
-     * @param type $data
-     * @param type $uuid
-     */
-    public static function ramPreSave(&$data, $uuid) {
-        
-    }
-
-    public static function ramAfterSave(&$data, $uuid) {
-        
-    }
-
-    public static function ramPreUpdate(&$data, $uuid) {
-        
-    }
-
-    /**
-     * 20220628
-     * @param type $data
-     * @param type $uuid
-     */
-    public static function ramAfterUpdate(&$data, $uuid) {
-        
-    }
-
-    public static function extraPreUpdate(&$data, $uuid) {
-        self::stopUse(__METHOD__);
-    }
-
-    /**
-     * 不删明细
-     */
-    public function extraPreDelete() {
-        //20220627
-        self::stopUse(__METHOD__);
-    }
-
-    /**
-     * 20220627:优化性能
-     */
-    public function ramPreDelete() {
-        
-    }
+trait FieldTraits{
 
     /**
      *
@@ -91,7 +16,7 @@ class StoreManageService extends Base implements MainModelInterface {
     /**
      *
      */
-    public function fAppId() {
+    public function fChangeId() {
         return $this->getFFieldValue(__FUNCTION__);
     }
 
@@ -102,31 +27,80 @@ class StoreManageService extends Base implements MainModelInterface {
         return $this->getFFieldValue(__FUNCTION__);
     }
 
+    public function fSetPlace() {
+        return $this->getFFieldValue(__FUNCTION__);
+    }
     /**
-     * 客户id
+     * [冗]客户id
      */
     public function fCustomerId() {
         return $this->getFFieldValue(__FUNCTION__);
     }
 
     /**
-     * 仓库id
+     * [冗]仓库id
      */
     public function fStoreId() {
         return $this->getFFieldValue(__FUNCTION__);
     }
 
     /**
-     * 出库说明
+     * 入库/出库单id
      */
-    public function fDescribe() {
+    public function fBillId() {
         return $this->getFFieldValue(__FUNCTION__);
     }
 
     /**
-     * 出库人
+     * 明细id
+     */
+    public function fDtlId() {
+        return $this->getFFieldValue(__FUNCTION__);
+    }
+
+    /**
+     * [冗]明细名称
+     */
+    public function fDtlName() {
+        return $this->getFFieldValue(__FUNCTION__);
+    }
+
+    /**
+     * 数量
+     */
+    public function fAmount() {
+        return $this->getFFieldValue(__FUNCTION__);
+    }
+
+    /**
+     * 单价
+     */
+    public function fUnitPrize() {
+        return $this->getFFieldValue(__FUNCTION__);
+    }
+
+    /**
+     * 金额
+     */
+    public function fSumPrize() {
+        return $this->getFFieldValue(__FUNCTION__);
+    }
+
+    /**
+     * [冗]单位
+     */
+    public function fUnit() {
+        return $this->getFFieldValue(__FUNCTION__);
+    }
+
+    /**
+     * 入库人
      */
     public function fUserId() {
+        return $this->getFFieldValue(__FUNCTION__);
+    }
+    
+    public function fGoodsId() {
         return $this->getFFieldValue(__FUNCTION__);
     }
 
@@ -220,5 +194,4 @@ class StoreManageService extends Base implements MainModelInterface {
     public function fUpdateTime() {
         return $this->getFFieldValue(__FUNCTION__);
     }
-
 }
